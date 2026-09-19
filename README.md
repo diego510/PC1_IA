@@ -1,4 +1,4 @@
-# Alerta Sonora Accesible
+# Alerta Sonora Accesible - Alertly
 ## Proyecto Integrador de IA para Negocios — AD5018
 ### Universidad de Ingeniería y Tecnología (UTEC)
 
