@@ -7,7 +7,7 @@
 **PC1:** Semana 6  
 **Periodo principal de construcción:** Semanas 7–13  
 **PC2:** Semana 14  
-**Fin del ciclo académico:** Semana 18
+**Fin del ciclo académico:** Semana 16
 
 ---
 
