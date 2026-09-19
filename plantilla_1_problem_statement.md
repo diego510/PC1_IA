@@ -5,12 +5,12 @@
 ---
 
 **Equipo:**
-- Integrante 1: Valeria Champac
-- Integrante 2: _______________________________________________
-- Integrante 3: _______________________________________________
+- Integrante 1: Harold Inca
+- Integrante 2: Diego Requena
+- Integrante 3: Jennifer Patiño
 
-**Fecha de entrega:** _______________  
-**Versión del canvas:** v4 — actualizada para PC1
+**Fecha de entrega:** 18/09/2026
+**Versión del canvas:**
 
 ---
 
@@ -137,6 +137,3 @@ No aplica. El equipo sí entrenará un modelo de clasificación de audio.
 | ¿Está diferenciada la cantidad de audios frente a la cantidad de usuarios? | SÍ |
 | ¿Todos los integrantes pueden explicar el canvas? | *(completar en equipo)* |
 
----
-
-*Framework PROMPT v2.0 — AD5018 UTEC | Plantilla 1 de 4*
