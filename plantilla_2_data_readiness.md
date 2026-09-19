@@ -5,12 +5,11 @@
 ---
 
 **Equipo:**
-- Integrante 1: Valeria Champac
-- Integrante 2: _______________________________________________
-- Integrante 3: _______________________________________________
+- Integrante 1: Harold Inca
+- Integrante 2: Diego Requena
+- Integrante 3: Jennifer Patiño
 
-**Fecha de entrega:** _______________
-
+**Fecha de entrega:** 18/09/2026
 **Tipo de IA:** Clasificación de audio **A3** + capa de lenguaje **G1**.
 
 ---
@@ -203,7 +202,3 @@ Estos valores son de diseño inicial y se ajustarán después de evaluar V1.
 | ¿Existe estrategia A3? | SÍ |
 | ¿Se identificaron riesgos de privacidad? | SÍ |
 | ¿Falta completar la colección real? | SÍ |
-
----
-
-*Framework PROMPT v2.0 — AD5018 UTEC | Plantilla 2 de 4*
