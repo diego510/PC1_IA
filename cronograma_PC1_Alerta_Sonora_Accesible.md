@@ -319,7 +319,7 @@ Responsable principal de:
 
 ---
 
-## 7. Semanas 15–18
+## 7. Semanas 15–16
 
 La guía del proyecto ubica la sustentación final del MVP en la **Semana 14**. Dado que el ciclo académico indicado por el equipo continúa hasta la **Semana 18**, estas semanas se consideran fuera del cronograma principal de construcción exigido para el proyecto, salvo que el docente asigne actividades adicionales, correcciones o cierre académico.
 
