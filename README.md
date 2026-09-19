@@ -15,7 +15,7 @@
 **Framework:** PROMPT v2.0  
 **Semana actual:** Semana 5  
 **Próximo hito:** PC1 — Semana 6  
-**Fin del ciclo académico:** Semana 18  
+**Fin del ciclo académico:** Semana 16 
 **Estado del proyecto:** En diseño y preparación para PC1
 
 ---
