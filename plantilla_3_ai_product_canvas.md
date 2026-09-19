@@ -5,12 +5,12 @@
 ---
 
 **Equipo:**
-- Integrante 1: Valeria Champac
-- Integrante 2: _______________________________________________
-- Integrante 3: _______________________________________________
+- Integrante 1: Harold Inca
+- Integrante 2: Diego Requena
+- Integrante 3: Jennifer Patiños
 
-**Fecha de entrega:** _______________  
-**Versión:** v3 — actualizada para PC1
+**Fecha de entrega:** 18/09/2026
+**Versión:**
 
 ---
 
@@ -295,7 +295,3 @@ Se registrará:
 | Mejora A3 | ≥ 5 pp |
 | Casos G1 | 20 |
 | Meta G1 | ≥ 90 % |
-
----
-
-*Framework PROMPT v2.0 — AD5018 UTEC | Plantilla 3 de 4*
