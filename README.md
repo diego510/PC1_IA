@@ -1,4 +1,4 @@
-# Alerta Sonora Accesible - Alertly
+# Alertly
 ## Proyecto Integrador de IA para Negocios — AD5018
 ### Universidad de Ingeniería y Tecnología (UTEC)
 
@@ -16,33 +16,35 @@
 **Semana actual:** Semana 5  
 **Próximo hito:** PC1 — Semana 6  
 **Fin del ciclo académico:** Semana 16 
-**Estado del proyecto:** En diseño y preparación para PC1
+**Estado del proyecto:** En diseño y preparación para PC1 (v2 — alcance ajustado tras feedback docente)
 
 ---
 
 ## 2. Nombre del MVP
 
-**Alerta Sonora Accesible**
+**Alertly**
 
 ---
 
 ## 3. Resumen del proyecto
 
-Alerta Sonora Accesible es un MVP orientado a personas con discapacidad auditiva que pueden tener dificultad para identificar oportunamente sonidos relevantes de su entorno.
+Alertly es un MVP orientado a personas con discapacidad auditiva que pueden tener dificultad para identificar oportunamente una alarma de incendio en su hogar.
 
-El proyecto busca detectar un conjunto acotado de eventos acústicos —alarma, detector de humo, timbre, bocina y ruido de fondo— mediante un modelo de clasificación de audio entrenado por el equipo. El resultado del modelo se conecta con una capa de lenguaje que transforma la clase detectada, el nivel de confianza y la criticidad del evento en una alerta visual/textual breve y comprensible.
+El proyecto busca detectar dos categorías de sonido —**alarma de incendio (incluye detector de humo)** y **ruido de fondo**— mediante un modelo de clasificación de audio entrenado por el equipo. El resultado del modelo se conecta con una capa de lenguaje que transforma la clase detectada, el nivel de confianza y la criticidad del evento en una **notificación por Telegram/WhatsApp**, breve y comprensible.
+
+> **Nota de versión:** el alcance original consideraba 5 categorías de sonido (alarma, detector de humo, timbre, bocina, ruido de fondo) y una interfaz web/app móvil. Tras recibir feedback del docente, el equipo redujo el alcance a **2 clases** —priorizando profundidad en el escenario de mayor riesgo de vida— y cambió el canal de entrega de una interfaz visual propia a **notificaciones por Telegram/WhatsApp**, lo cual simplifica el desarrollo sin perder el valor central del producto.
 
 El proyecto combina:
 
-- **Componente analítico A3:** clasificación de audio con reentrenamiento a partir de errores observados.
-- **Componente generativo G1:** prompt con contexto fijo para convertir la salida del modelo en una alerta accesible.
+- **Componente analítico A3:** clasificación binaria de audio con reentrenamiento a partir de errores observados.
+- **Componente generativo G1:** prompt con contexto fijo para convertir la salida del modelo en una notificación accesible (alerta o mensaje tranquilizador).
 - **Patrón de conexión:** Modelo → Lenguaje.
 
 ---
 
 ## 4. Problema
 
-Las personas con discapacidad auditiva que permanecen solas en el hogar o se desplazan por espacios cotidianos tienen dificultad para identificar oportunamente eventos del entorno comunicados principalmente mediante señales acústicas —como alarmas, detectores de humo, timbres o bocinas— debido a su acceso limitado o nulo al canal auditivo, lo que incrementa la posibilidad de no reaccionar oportunamente ante eventos relevantes y reduce su autonomía.
+Las personas con discapacidad auditiva que permanecen solas en el hogar tienen dificultad para identificar oportunamente una alarma de incendio o detector de humo activado, debido a su acceso limitado o nulo al canal auditivo, lo que incrementa la posibilidad de no reaccionar a tiempo ante una situación de riesgo real y reduce su seguridad y autonomía.
 
 ---
 
@@ -50,16 +52,16 @@ Las personas con discapacidad auditiva que permanecen solas en el hogar o se des
 
 Personas con discapacidad auditiva total o parcial que:
 
-- pasan periodos de tiempo sin una persona oyente cerca;
-- necesitan reconocer sonidos relevantes del entorno;
-- pueden utilizar un dispositivo con navegador y micrófono;
-- requieren una señal visual/textual como alternativa al canal auditivo.
+- pasan periodos de tiempo solas en casa, sin una persona oyente cerca;
+- necesitan reconocer si suena una alarma de incendio en su entorno;
+- pueden utilizar un dispositivo con micrófono para la captura de audio;
+- cuentan con una cuenta de Telegram o WhatsApp donde recibir notificaciones.
 
 ---
 
 ## 6. Propuesta de valor
 
-Detectar sonidos relevantes del entorno y convertirlos en alertas visuales/textuales comprensibles, indicando el nivel de certeza de la detección y evitando presentar como seguro aquello que el modelo no reconoce con suficiente confianza.
+Detectar si suena una alarma de incendio en el entorno del usuario y enviarle de inmediato una notificación clara por Telegram/WhatsApp, indicando el nivel de certeza. Cuando no se detecta ninguna alarma, el sistema también confirma activamente que todo está tranquilo, para que el usuario sepa que sigue protegido sin necesidad de revisar nada.
 
 ---
 
@@ -68,31 +70,28 @@ Detectar sonidos relevantes del entorno y convertirlos en alertas visuales/textu
 ### Incluye
 
 - captura de audio desde el micrófono;
-- clasificación de cinco categorías:
-  - alarma;
-  - detector de humo;
-  - timbre;
-  - bocina;
+- clasificación de dos categorías:
+  - alarma de incendio (incluye detector de humo);
   - ruido de fondo;
 - score de confianza;
 - umbrales iniciales por clase;
 - clasificación de criticidad;
-- alerta visual/textual;
+- notificación por Telegram/WhatsApp (alerta + mensaje tranquilizador);
 - capa generativa G1;
 - expresión de incertidumbre en casos de baja confianza;
-- interfaz web;
-- despliegue mediante URL pública;
+- despliegue de la captura de audio mediante página web mínima;
 - reentrenamiento del modelo para cumplir el nivel A3;
 - validación con usuarios y registro de resultados.
 
 ### No incluye
 
-- reconocimiento ilimitado de cualquier sonido;
+- reconocimiento de más de 2 categorías de sonido;
 - llamadas automáticas a servicios de emergencia;
 - geolocalización;
 - almacenamiento permanente de audio;
 - reconocimiento o transcripción de conversaciones;
 - aplicación móvil nativa;
+- interfaz visual propia (dashboard, historial de alertas);
 - integración con wearables;
 - RAG;
 - agentes autónomos;
@@ -104,21 +103,18 @@ Detectar sonidos relevantes del entorno y convertirlos en alertas visuales/textu
 
 ### Componente analítico — A3
 
-El modelo clasificará fragmentos de audio en cinco categorías:
+El modelo clasificará fragmentos de audio en dos categorías:
 
 ```text
-alarma
-detector_humo
-timbre
-bocina
+alarma_incendio
 ruido_de_fondo
 ```
 
 La estrategia A3 será:
 
 1. entrenar una primera versión del modelo;
-2. medir su desempeño;
-3. analizar errores y clases problemáticas;
+2. medir su desempeño (recall, matriz de confusión 2×2);
+3. analizar errores y condiciones problemáticas;
 4. recolectar nuevas muestras dirigidas a esos errores;
 5. reentrenar;
 6. comparar V1 vs. V2.
@@ -131,7 +127,7 @@ La capa G1 recibe:
 clase predicha + score de confianza + criticidad + umbral
 ```
 
-y genera una alerta breve, clara y proporcional al nivel de confianza.
+y genera una notificación breve, clara y proporcional al nivel de confianza, enviada por Telegram/WhatsApp. Si la clase es `ruido_de_fondo` (o la confianza de `alarma_incendio` no supera el umbral), el mensaje generado es tranquilizador, confirmando que no hay alarma activa.
 
 ### Flujo
 
@@ -140,7 +136,7 @@ Micrófono
    ↓
 Audio
    ↓
-Modelo de clasificación A3
+Modelo de clasificación A3 (2 clases)
    ↓
 Clase + score de confianza
    ↓
@@ -148,7 +144,7 @@ Criticidad + umbral
    ↓
 Capa G1
    ↓
-Alerta visual/textual
+Notificación por Telegram/WhatsApp
    ↓
 Usuario
 ```
@@ -161,19 +157,15 @@ Usuario
 
 | Clase | Muestras de audio objetivo |
 |---|---:|
-| Alarma | 50 |
-| Detector de humo | 50 |
-| Timbre | 50 |
-| Bocina | 50 |
-| Ruido de fondo | 60 |
-| **Total** | **260** |
+| Alarma de incendio | 60 |
+| Ruido de fondo | 70 |
+| **Total** | **130** |
 
-> **Importante:** las 260 observaciones corresponden a muestras de audio para entrenar el modelo, no a personas participantes.
+> **Importante:** las 130 observaciones corresponden a muestras de audio para entrenar el modelo, no a personas participantes. El volumen por clase es mayor al de la versión anterior (5 clases), ya que el esfuerzo de recolección ahora se concentra en solo 2 categorías.
 
 ### Fuentes previstas
 
 - Freesound.org
-- Pixabay Audio
 - Zapsplat
 - grabaciones propias
 
@@ -188,13 +180,15 @@ Para estructurar la PC1 se utilizan valores académicos provisionales que deber�
 | Indicador | Baseline / referencia | Meta |
 |---|---:|---:|
 | Identificación correcta de eventos | 40 % provisional | ≥ 80 % |
-| Tiempo promedio de reacción | 6 s provisional | ≤ 3 s |
-| Baseline técnico de clase mayoritaria | 23.1 % accuracy | Superarlo ampliamente |
+| Tiempo promedio hasta la notificación | 6 s provisional | ≤ 3 s |
+| Baseline técnico de clase mayoritaria | 53.8 % accuracy (ruido_de_fondo) | Superarlo — foco en recall, no en accuracy |
 | Accuracy global del modelo | — | ≥ 80 % |
-| Recall en alarma | — | ≥ 85 % |
-| Recall en detector de humo | — | ≥ 85 % |
-| Mejora después del reentrenamiento | V1 | ≥ +5 pp de recall en la clase priorizada |
+| Recall en alarma_incendio | — | ≥ 85 % |
+| Precision en alarma_incendio | — | ≥ 80 % (para no saturar con falsas alarmas) |
+| Mejora después del reentrenamiento | V1 | ≥ +5 pp de recall en alarma_incendio |
 | Calidad del componente G1 | — | ≥ 90 % de 20 casos de prueba |
+
+> **Nota:** al pasar de 5 a 2 clases, el baseline técnico de "predecir siempre la clase mayoritaria" sube de 23.1 % a 53.8 % de accuracy. Por eso la métrica prioritaria del proyecto es el **recall de alarma_incendio** y no el accuracy general: un modelo que siempre predijera "ruido de fondo" tendría accuracy alto pero 0 % de recall en la clase que realmente importa.
 
 ---
 
@@ -208,11 +202,11 @@ La validación del MVP se realizará con una muestra pequeña y manejable acorde
 
 Se registrará:
 
-- evento presentado;
+- evento presentado (alarma_incendio o ruido_de_fondo);
 - si fue identificado correctamente;
-- tiempo de reacción;
-- comprensión de la alerta;
-- errores observados;
+- tiempo hasta recibir la notificación;
+- comprensión del mensaje recibido;
+- errores observados (falso positivo / falso negativo);
 - comentarios del usuario.
 
 ---
@@ -223,9 +217,9 @@ Se registrará:
 |---|---|
 | Entrenamiento del modelo | Teachable Machine — Audio |
 | Inferencia | TensorFlow.js |
-| Captura de audio | Web Audio API |
-| Interfaz | HTML / CSS / JavaScript |
+| Captura de audio | Web Audio API (página mínima, sin interfaz visual compleja) |
 | Capa G1 | API de un modelo de lenguaje con prompt fijo |
+| Notificaciones | Telegram Bot API (o WhatsApp Business API) |
 | Backend | Función serverless |
 | Despliegue | Vercel |
 | Repositorio | GitHub |
@@ -244,6 +238,8 @@ El stack deberá ser verificado mediante una prueba técnica antes de considerar
 - [x] Consecuencia medible planteada.
 - [x] Elección de A3 + G1.
 - [x] Patrón Modelo → Lenguaje.
+- [x] Ajuste de alcance a 2 clases (feedback docente).
+- [x] Cambio de canal a notificación por Telegram/WhatsApp (feedback docente).
 - [x] Alcance preliminar del MVP.
 - [x] Inventario inicial de datos.
 - [x] Diseño preliminar del flujo.
@@ -253,9 +249,10 @@ El stack deberá ser verificado mediante una prueba técnica antes de considerar
 
 ### Por cerrar antes de PC1
 
-- [ ] Completar la recolección real de audios.
+- [ ] Completar la recolección real de audios (alarma_incendio y ruido_de_fondo).
 - [ ] Registrar el número final de muestras por clase.
 - [ ] Documentar licencias y fuentes de los audios.
+- [ ] Definir e implementar el bot de Telegram/WhatsApp.
 - [ ] Verificar técnicamente el stack.
 - [ ] Formalizar la tabla de criticidad.
 - [ ] Confirmar los umbrales iniciales.
@@ -281,10 +278,7 @@ El stack deberá ser verificado mediante una prueba técnica antes de considerar
 │   └── plantilla_3_ai_product_canvas.md
 │
 ├── datos/
-│   ├── alarma/
-│   ├── detector_humo/
-│   ├── timbre/
-│   ├── bocina/
+│   ├── alarma_incendio/
 │   └── ruido_de_fondo/
 │
 └── evidencia/
@@ -299,21 +293,21 @@ El stack deberá ser verificado mediante una prueba técnica antes de considerar
 
 ### Semana 5
 - cerrar las tres plantillas de PC1;
-- organizar y documentar el dataset;
-- verificar acceso a las herramientas;
+- organizar y documentar el dataset (2 clases);
+- verificar acceso a las herramientas (Teachable Machine, Telegram/WhatsApp API);
 - construir el resumen ejecutivo;
 - elaborar el cronograma.
 
 ### Semana 6
 - entregar PC1;
 - sustentar problema, datos, producto, stack y plan de construcción;
-- dejar congelados los niveles A3 + G1, el patrón de conexión y los KRs comprometidos.
+- dejar congelados los niveles A3 + G1, el patrón de conexión, el alcance de 2 clases y los KRs comprometidos.
 
 ### Después de PC1
 - construir la primera versión del modelo;
 - integrar la capa G1;
-- desarrollar la interfaz web;
-- desplegar una primera versión pública;
+- configurar el bot de Telegram/WhatsApp;
+- desplegar una primera versión funcional;
 - evaluar V1;
 - recolectar nuevos datos;
 - reentrenar V2;
@@ -334,5 +328,3 @@ El stack deberá ser verificado mediante una prueba técnica antes de considerar
 - `presentacion_pc1.pdf` — sustentación de la propuesta
 
 ---
-
-**Estado actual:** Preparación de PC1 — Semana 5.
